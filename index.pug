@@ -1,0 +1,82 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title cardwave
+        // font-awesome
+        link(rel="stylesheet", href="./css/index.css")
+        <script src="https://kit.fontawesome.com/2ba695a310.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+        script(src = "./js/index.js")
+    body 
+        .mainWrapper 
+            .left_sec_cover
+            .left_sec_contd
+                .showBtnCon 
+                    button.showHideBtn 
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                .logo_section
+                    .logoContd 
+                    h2.logo_heading Your's Reading 
+                    p by orzoon  
+                ul.dashboard_contd 
+                    li.heading 
+                        .h_logo 
+                            img(src="./assets/dashboard.png", alt="")
+                        h4 Dashboard
+
+                    li.li_common 
+                        h5.title Books
+                        h4.no 15
+                        .progressbarCon 
+                    li.li_common 
+                        h5.title Articles
+                        h4.no 88
+                        .progressbarCon 
+                    li.li_common 
+                        h5.title Reading hours
+                        h4.no 255
+                        .progressbarCon 
+                    li.li_common
+                        h5.title Friends Ranking
+                        h4.no 3rd
+                        .achievement_icon
+                            img(src="./assets/clap.png", alt="")
+                    li.li_common
+                        h5.title Social Ranking
+                        h4.no Top 15%
+                        .achievement_icon
+                            img(src="./assets/brain.png", alt="")
+
+            .right_sec_contd
+                // for-small devices
+                .small_logo
+                    .logoContd 
+                    h2.logo_heading Your's Reading 
+                    p by orzoon
+                .rMidWrapper
+                    .text_sec 
+                        h2.displayText The Red bull
+                        p.bookDes amet consectetur esse facere blanditiis nihil, soluta assumenda, beatae ipsum ullam quam velit ipsam quia
+
+                    button.reviewBtn Write Review &nbsp;<i class="fa-solid fa-star"></i>
+                    .bookdisplay_sec 
+                        .roundCon
+                            .bookContainer 
+                ul.swipe_sec 
+                    li.bottom 
+                        h4.title The Red bull
+                        p.month Oct
+                        p.no 1
+                    li.bottom 
+                        h4.title Coke history
+                        p.month Nov
+                        p.no 2
+
+
+
+
+
