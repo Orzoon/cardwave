@@ -15,7 +15,6 @@ body {
     font-family: 'Noto Sans', sans-serif;
 }
 
-
 .mainWrapper{
     background-color: #F4F6FA;
     height: auto;
@@ -156,13 +155,24 @@ body {
                 height: 6px;
                 background: #ddd;
                 border-radius: 5px;
+                position: relative;
+                overflow: hidden;
+
+                & .progress {
+                    position: absolute;
+                    height: 120%;
+                    border-radius: 8px;
+                    width: 100%;
+                    top: 50%;
+                    transform: translateY(-50%);
+
+                }
             }
             & .achievement_icon{
                 justify-self: end;
                 align-self: start;
                 height: 25px;
                 width: 25px;
-                //background: red;
                 img {
                     width: 100%;
                     height: 100%;
@@ -197,7 +207,21 @@ body {
 
 }
 
+//** PROGRESS COLORS AND WIDTH **//@at-root
+.pFirst{
+    background: #0ae3f3;
+    left: -60%;
+}
 
+.pSecond {
+    background: #f7e575;
+    left: -30%;
+}
+
+.pThird {
+    background: #f85e21;
+    left: -70%;
+}
 //** defined grid **//
 .right_sec_contd {
     padding: 10px;
@@ -244,20 +268,39 @@ body {
         grid-template-rows: auto auto auto;
         grid-row-gap: 10px;
         .text_sec {
+           // border: 1px solid red;
             // predefinedheight
             //min-height: 100px;
             padding: 30px 0px 10px 0px;
             height: auto;
             display: grid;
             align-content: start;
-            & h2 {
-                font-size: 24px;
-                font-weight: 500;
+
+            & .headingWrapper {
+                overflow: hidden;
+                min-height: 34px;
+                height: 34px;
+                //border: 2px solid blue;
+                & h2.displayText {
+                    opacity: 0;
+                    position: absolute;
+                    top: 100%;
+                    font-size: 24px;
+                    font-weight: 500;
+                    height: 100%;
+                    
+                    //border: 1px solid blue;
+                }
             }
-    
-            & p {
-                font-size: 14px;
-                color: rgb(81, 80, 80);
+
+            & .paraWrapper{
+                overflow: hidden;
+                //border: 1px solid green;
+                min-height: 50px;
+                & p.bookDes {
+                    font-size: 14px;
+                    color: rgb(81, 80, 80);
+                }
             }
         }
     
@@ -298,18 +341,19 @@ body {
                     bottom: 60px;
                     height: 200px;
                     width: 150px;
-                    left: 45px;
-                    transform: rotate(20deg);
-                    transform-origin: center center;
-                    border: 1px solid red;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    display: grid;
+                    justify-items: center;
+                    align-items: center;
                 }
     
             }
         }
     }
     ul.swipe_sec{
+        margin-top: 50px;
         height: 120px;
-       // border: 1px solid red;
         list-style-type: none;
         width: 100%;
         display: grid;
@@ -329,8 +373,10 @@ body {
             grid-template-columns: 1fr;
             grid-auto-rows: auto;
             grid-row-gap:6px;
+            cursor: pointer;
             & h4.title {
                 display: none;
+                opacity: 0
             }
 
             & p.month {
@@ -344,11 +390,129 @@ body {
                 font-weight: 600;
                 font-size: 14px;
                 text-align: center;
+                //color: #05BAC7 !important;
+                color: #636364;
+            }
+        }
+
+        & li.bottom.bExpand {
+            position: relative;
+            width: 100px !important;
+            height: 100px;
+            padding: 10px 12px;
+            background: #fff;
+
+            & p.month {
+                position: absolute;
+                top: -25px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            & h4.title{
+                display: block;
+                font-size: 14px;
+                font-weight: 600;
+                opacity: 1
+            }
+            & p.pShow {
+                font-size: 16px;
                 color: #05BAC7 !important;
+                text-align: center;
             }
         }
     }
 
+}
+
+
+//** BOOK3D **//
+//** POSVARS **//
+
+$depth: 33px; // breadth
+$bookWidth: 150px;
+$bookHeight: 200px;
+//posVars
+$frontBackWidth: $bookWidth;
+$frontBackHeight: $bookHeight;
+
+// width eq to depth
+$leftRightWidth: $depth;
+$leftRightHeight: 200px;
+// width of left-right ---> height
+$topBottomWidth: $bookWidth;
+$topBottomHeight: $depth;
+$bookEdge: 8px;
+
+.Book {
+    // height: 250px;
+    // width: 200px;
+    width: $bookWidth;
+    height: $bookHeight;
+    position: relative;
+    transform-style: preserve-3d;
+    // depth
+    transform: translateZ(- calc($depth/2));
+}
+
+// commoin styles
+.book__face--front,
+.book__face--back,
+.book__face--right,
+.book__face--left,
+.book__face--top,
+.book__face--bottom{
+    position: absolute;
+    color: #fff;
+    font-size: 30px;
+    //opacity: 0.7;
+    text-align: center;
+}
+
+.book__face--front,
+.book__face--back {
+  width: $frontBackWidth;
+  height: $frontBackHeight;
+  background: red;
+}
+
+
+// same height
+.book__face--right,
+.book__face--left {
+  width: $leftRightWidth;
+  height: $leftRightHeight;
+  background: green;
+  //px centre
+  left: calc(($bookWidth/2) - ($leftRightWidth/2));
+  //transform: translateX(-50%);
+}
+
+.book__face--top,
+.book__face--bottom {
+  width: calc($topBottomWidth - $bookEdge/2);
+  height: $topBottomHeight;
+  background: orange;
+  top: calc(($bookHeight/2) - ($topBottomHeight/2));
+  //transform: translateY(-50%);
+}
+
+.book__face--top    { transform: rotateX( 90deg) translateZ(calc($bookHeight/2 - $bookEdge/2)); }
+.book__face--bottom { transform: rotateX(-90deg) translateZ(calc($bookHeight/2 - $bookEdge/2)); }
+.book__face--front  { transform: rotateY(  0deg) translateZ( calc($depth/2)); }
+.book__face--back   { transform: rotateY(180deg) translateZ( calc($depth/2)); }
+.book__face--left{ transform: rotateY(-90deg) translateZ(calc($bookWidth/2)); }
+.book__face--right{ transform: rotateY( 90deg) translateZ(calc($bookWidth/2 - $bookEdge/2))}
+
+.Book {
+    transform: translateZ( -50px);
+    transform:  rotateZ(30deg) rotateY(-30deg) rotateX(-20deg);
+}
+
+//! edge fix
+//** width of left-right ---> height
+.book__face--right{
+    height: calc($leftRightHeight - $bookEdge);
+    top: calc($bookEdge/2);
 }
 
 
@@ -481,11 +645,11 @@ body {
             .logoContd {
             }
     
-            h2 {
+            h2.displayText {
                 font-size: 16px;
                 line-height: 16px;
             }
-            p {
+            p.bookDes {
                 font-size: 12.5px;
             }
         }  
@@ -496,14 +660,19 @@ body {
             height: auto;
             display: grid;
             align-content: start;
-            & h2 {
-                font-size: 28px;
-                font-weight: 500;
+
+            & .headingWrapper{
+                & h2 {
+                    font-size: 28px;
+                    font-weight: 500;
+                }
             }
-    
-            & p {
-                font-size: 15.2px;
-                color: rgb(81, 80, 80);
+            
+            & .paraWrapper{ 
+                & p {
+                    font-size: 15.2px;
+                    color: rgb(81, 80, 80);
+                }
             }
         }
     
@@ -543,7 +712,6 @@ body {
                     font-weight: 600;
                     font-size: 14px;
                     text-align: center;
-                    color: #05BAC7 !important;
                 }
             }
         }
@@ -569,11 +737,11 @@ body {
     }
     .left_sec_contd {
         //box-shadow: 0px 0px 0px rgb(210, 234, 246);
-        box-shadow: none;
+        box-shadow: none !important;
         padding: 15px 30px;
-        width: 100%;
-        left: 0px;
-        position: relative;
+        width: 100% !important;
+        left: 0px !important;
+        position: relative !important;
         grid-area: left;
         & .showBtnCon{
             // to the right--size
@@ -626,7 +794,6 @@ body {
     
     }
 }
-
 
 @media only screen and (min-width: 1200px){
     .left_sec_contd {
@@ -669,7 +836,6 @@ body {
     }
 
     .right_sec_contd {
-        border: 1px solid red;
         padding: 15px 30px; 
         grid-area: right;
         width: 100%;
@@ -706,14 +872,18 @@ body {
             & .text_sec {
                 grid-area: textSec;
                 align-self: end;
-                
-                & h2 {
-                    font-size: 42px;
-                    margin-bottom: 10px;
+                & .headingWrapper{
+                    height: 68px;
+                    & h2.displayText {
+                        font-size: 42px;
+                        margin-bottom: 10px;
+                    }
                 }
 
-                & p {
-                    font-size: 16.5px;
+                & .paraWrapper {
+                    & p.bookDes {
+                        font-size: 16.5px;
+                    }
                 }
             }
 
@@ -728,16 +898,38 @@ body {
                     font-size: 16px;
                 }
             }
+   
+
             & .bookdisplay_sec{
                 grid-area: bookdisplay;
                 align-self: center;
+                & .roundCon {
+                    left: 0%;
+                    bottom: 0% !important;
+                    height: 300px; //?note  //
+                    width: 300px;
+                    border-radius: 50%;
+                    background: linear-gradient(to bottom right, #fff, #ddd);
+        
+                    & .bookContainer {
+                        position: absolute;
+                        bottom: 80px;
+                        height: 300px;
+                        width: 300px;
+                        left: 58%;
+                        transform: translateX(-50%);
+                        display: grid;
+                        justify-items: center;
+                        align-items: center;
+                    }
+        
+                }
             }
         }
 
         ul.swipe_sec{
             padding: 0px;
             grid-area: rBot;
-            border: 1px solid red;
             align-items: center;
             align-content: center;
 
@@ -751,8 +943,102 @@ body {
             }
         }
     }
-}
 
+
+
+    
+    //? BOOK SIZE //
+    //** BOOK3D **//
+    //** POSVARS **//
+
+    $depthl: 40px; // breadth
+    $bookWidthl: 220px;
+    $bookHeightl: 300px;
+    //posVars
+    $frontBackWidthl: $bookWidthl;
+    $frontBackHeightl: $bookHeightl;
+
+    // width eq to depth
+    $leftRightWidthl: $depthl;
+    $leftRightHeightl: 300px;
+    // width of left-right ---> height
+    $topBottomWidthl: $bookWidthl;
+    $topBottomHeightl: $depthl;
+    $bookEdgel: 15px;
+    .Book {
+        // height: 250px;
+        // width: 200px;
+        width: $bookWidthl;
+        height: $bookHeightl;
+        position: relative;
+        transform-style: preserve-3d;
+        // depth
+        transform: translateZ(- calc($depthl/2));
+    }
+    
+    // commoin styles
+    .book__face--front,
+    .book__face--back,
+    .book__face--right,
+    .book__face--left,
+    .book__face--top,
+    .book__face--bottom{
+        position: absolute;
+        color: #fff;
+        font-size: 30px;
+        //opacity: 0.7;
+        text-align: center;
+    }
+    
+    .book__face--front,
+    .book__face--back {
+      width: $frontBackWidthl;
+      height: $frontBackHeightl;
+      background: red;
+    }
+    
+    
+    // same height
+    .book__face--right,
+    .book__face--left {
+      width: $leftRightWidthl;
+      height: $leftRightHeightl;
+      background: green;
+      //px centre
+      left: calc(($bookWidthl/2) - ($leftRightWidthl/2));
+      //transform: translateX(-50%);
+    }
+    
+    .book__face--top,
+    .book__face--bottom {
+      width: calc($topBottomWidthl - $bookEdgel/2);
+      height: $topBottomHeightl;
+      background: orange;
+      top: calc(($bookHeightl/2) - ($topBottomHeightl/2));
+      //transform: translateY(-50%);
+    }
+    
+    
+    .book__face--top    { transform: rotateX( 90deg) translateZ(calc($bookHeightl/2 - $bookEdgel/2)); }
+    .book__face--bottom { transform: rotateX(-90deg) translateZ(calc($bookHeightl/2 - $bookEdgel/2)); }
+    .book__face--front  { transform: rotateY(  0deg) translateZ( calc($depthl/2)); }
+    .book__face--back   { transform: rotateY(180deg) translateZ( calc($depthl/2)); }
+    .book__face--left{ transform: rotateY(-90deg) translateZ(calc($bookWidthl/2)); }
+    .book__face--right{ transform: rotateY( 90deg) translateZ(calc($bookWidthl/2 - $bookEdgel/2))}
+    
+    .Book {
+        transform: translateZ( -50px);
+        transform:  rotateZ(30deg) rotateY(-30deg) rotateX(-20deg);
+    }
+    
+    // edge fix
+    // width of left-right ---> height
+    
+    .book__face--right{
+        height: calc($leftRightHeightl - $bookEdgel);
+        top: calc($bookEdgel/2);
+    }
+}
 
 // almosmt same as 1200
 @media only screen and (min-width: 1400px){
@@ -796,7 +1082,6 @@ body {
     }
 
     .right_sec_contd {
-        border: 1px solid red;
         padding: 15px 30px; 
         grid-area: right;
         width: 100%;
@@ -834,13 +1119,17 @@ body {
                 grid-area: textSec;
                 align-self: end;
                 
-                & h2 {
-                    font-size: 42px;
-                    margin-bottom: 10px;
+                & .headingWrapper {
+                    & h2.displayText {
+                        font-size: 42px;
+                        margin-bottom: 10px;
+                    }
                 }
 
-                & p {
-                    font-size: 16.5px;
+                & .paraWrapper{
+                    & p.bookDes {
+                        font-size: 16.5px;
+                    }
                 }
             }
 
@@ -864,7 +1153,6 @@ body {
         ul.swipe_sec{
             padding: 0px;
             grid-area: rBot;
-            border: 1px solid red;
             align-items: center;
             align-content: center;
 
@@ -880,16 +1168,14 @@ body {
     }
 }
 
-
 // heights
 @media only screen and (min-width: 1600px) and (min-height: 1000px){
     .mainWrapper{
-        border: 5px solid green;
+    
     }
 
     // only height
     .right_sec_contd {
-        border: 1px solid red;
         padding: 15px 30px; 
         grid-area: right;
         width: 100%;
@@ -927,13 +1213,17 @@ body {
                 grid-area: textSec;
                 align-self: end;
                 
-                & h2 {
-                    font-size: 42px;
-                    margin-bottom: 10px;
+                & .headingWrapper{
+                    & h2.displayText {
+                        font-size: 42px;
+                        margin-bottom: 10px;
+                    }
                 }
 
-                & p {
-                    font-size: 16.5px;
+                & .paraWrapper{
+                    & p.bookDes {
+                        font-size: 16.5px;
+                    }
                 }
             }
 
@@ -957,7 +1247,6 @@ body {
         ul.swipe_sec{
             padding: 0px;
             grid-area: rBot;
-            border: 1px solid red;
             align-items: center;
             align-content: center;
 

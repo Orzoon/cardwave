@@ -19,7 +19,7 @@ html(lang="en")
                         <i class="fa-solid fa-arrow-right"></i>
 
                 .logo_section
-                    .logoContd 
+                    .logoContd
                     h2.logo_heading Your's Reading 
                     p by orzoon  
                 ul.dashboard_contd 
@@ -30,16 +30,19 @@ html(lang="en")
 
                     li.li_common 
                         h5.title Books
-                        h4.no 15
+                        h4.no.h4Test 15
                         .progressbarCon 
+                            .progress.pFirst
                     li.li_common 
                         h5.title Articles
                         h4.no 88
                         .progressbarCon 
+                            .progress.pSecond
                     li.li_common 
                         h5.title Reading hours
                         h4.no 255
                         .progressbarCon 
+                            .progress.pThird
                     li.li_common
                         h5.title Friends Ranking
                         h4.no 3rd
@@ -59,22 +62,37 @@ html(lang="en")
                     p by orzoon
                 .rMidWrapper
                     .text_sec 
-                        h2.displayText The Red bull
-                        p.bookDes amet consectetur esse facere blanditiis nihil, soluta assumenda, beatae ipsum ullam quam velit ipsam quia
+                        .headingWrapper
+                            h2.displayText.displayText0 Wings Of Change
+                        .paraWrapper
+                            p.bookDes.bookDes0 amet consectetur esse facere blanditiis nihil, soluta assumenda, beatae ipsum ullam quam velit ipsam quia
 
                     button.reviewBtn Write Review &nbsp;<i class="fa-solid fa-star"></i>
                     .bookdisplay_sec 
                         .roundCon
                             .bookContainer 
+                                .Book 
+                                    <div class="book__face book__face--front">front</div>
+                                    <div class="book__face book__face--back">back</div>
+                                    <div class="book__face book__face--right">r</div>
+                                    <div class="book__face book__face--left">l</div>
+                                    <div class="book__face book__face--top">t</div>
+                                    <div class="book__face book__face--bottom">b</div>
                 ul.swipe_sec 
+                    li.bottom.bExpand
+                        h4.title.b_title0 Wings Of Change
+                        p.month.month0 Sep
+                        p.no.pShow 1
                     li.bottom 
-                        h4.title The Red bull
-                        p.month Oct
-                        p.no 1
-                    li.bottom 
-                        h4.title Coke history
-                        p.month Nov
+                        h4.title.b_title1 Samurai Warrior
+                        p.month.month1 Oct
                         p.no 2
+                    li.bottom 
+                        h4.title.b_title2 Cosmos
+                        p.month.month2 Nov
+                        p.no 3
+
+                        
 
 
 
