@@ -4,6 +4,9 @@
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 body {
@@ -242,6 +245,10 @@ body {
   font-size: 12px;
   font-weight: 600;
   color: rgb(135, 133, 133);
+}
+.right_sec_contd .color {
+  color: #8cddf2;
+  color: #255e6c;
 }
 .right_sec_contd .rMidWrapper {
   display: grid;

@@ -10,7 +10,11 @@ window.addEventListener("load", () => {
     //---> BookHheading and Description --parent
     const headingWrapper = document.querySelector(".headingWrapper");
     const paraWrapper = document.querySelector(".paraWrapper");
-
+    const colors = [
+        ["#f3c9d4","#a573bc"],
+        ["#f3c296","#ba471a"],
+        ["#8cddf2","#255e6c"]
+    ]
 
     /** initialLoadAnimations */
     initialLoadAnimation();
@@ -104,6 +108,11 @@ window.addEventListener("load", () => {
         gsap.to(".figure0", {
             top: "0%",
             duration: 0
+        })
+
+        gsap.to(".roundCon",{
+            duration: 0,
+            background: `linear-gradient(to bottom right, ${colors[0][0]}, ${colors[0][1]})`
         })
         
         let leftTimeline = gsap.timeline({})
@@ -382,7 +391,7 @@ window.addEventListener("load", () => {
             duration: 2.5
         })
         
-
+      
         const Book = document.querySelector(".Book");
         const bookHeight = parseInt(window.getComputedStyle(Book).height);
         gsap.fromTo(bookCover,{
@@ -394,6 +403,18 @@ window.addEventListener("load", () => {
                 duration: 1,
                 //ease: 'ease-in-out'
             }  
+        )
+
+        gsap.to(".roundCon",
+            {
+                delay: 0.4,
+                background:`linear-gradient(to bottom right, ${colors[currentBookNo][0]}, ${colors[currentBookNo][1]})`,
+                duration: 0.8,
+                ease: "linear",
+                onComplete: () => {
+                    console.log("completetd")
+                }
+            }
         )
 
     }
