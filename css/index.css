@@ -270,9 +270,12 @@ body {
 }
 .right_sec_contd .rMidWrapper .text_sec .paraWrapper {
   overflow: hidden;
-  min-height: 50px;
+  min-height: 80px;
 }
 .right_sec_contd .rMidWrapper .text_sec .paraWrapper p.bookDes {
+  position: absolute;
+  opacity: 0;
+  top: 100%;
   font-size: 14px;
   color: rgb(81, 80, 80);
 }
@@ -408,14 +411,14 @@ body {
 .book__face--back {
   width: 150px;
   height: 200px;
-  background: red;
+  background: #959294;
 }
 
 .book__face--right,
 .book__face--left {
   width: 33px;
   height: 200px;
-  background: green;
+  background: #dddde0;
   left: 58.5px;
 }
 
@@ -423,7 +426,7 @@ body {
 .book__face--bottom {
   width: 146px;
   height: 33px;
-  background: orange;
+  background: #b0b0b3;
   top: 83.5px;
 }
 
@@ -461,6 +464,45 @@ body {
   top: 4px;
 }
 
+.book__face--front {
+  overflow: hidden;
+}
+.book__face--front .figure {
+  position: absolute;
+  top: calc(100% + 100px);
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.book__face--front .figure img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  overflow: hidden;
+}
+.book__face--front .figure .svgContainer {
+  top: -120px;
+  position: absolute;
+  height: 80px;
+  height: 140px;
+  width: 900px;
+  display: grid;
+  z-index: -1;
+}
+.book__face--front .figure .svgContainer0 {
+  background: url("../assets/bookSvgT0.svg");
+  background-size: cover;
+}
+.book__face--front .figure .svgContainer1 {
+  background: url("../assets/bookSvgT1.svg");
+  background-size: cover;
+}
+.book__face--front .figure .svgContainer2 {
+  background: url("../assets/bookSvgT2.svg");
+  background-size: cover;
+}
+
 @media only screen and (min-width: 320px) {
   .left_sec_contd {
     padding: 15px;
@@ -472,6 +514,9 @@ body {
     position: absolute;
     top: 50%;
     right: -40px;
+  }
+  .paraWrapper {
+    min-height: 62px !important;
   }
 }
 @media only screen and (min-width: 480px) {
@@ -530,6 +575,11 @@ body {
   .right_sec_contd {
     padding: 10px;
     padding-left: 50px;
+  }
+}
+@media only screen and (min-width: 400px) {
+  .paraWrapper {
+    min-height: 50px !important;
   }
 }
 @media only screen and (min-width: 768px) {
@@ -832,20 +882,17 @@ body {
 .book__face--back {
     width: 220px;
     height: 300px;
-    background: red;
   }
   .book__face--right,
 .book__face--left {
     width: 40px;
     height: 300px;
-    background: green;
     left: 90px;
   }
   .book__face--top,
 .book__face--bottom {
     width: 212.5px;
     height: 40px;
-    background: orange;
     top: 130px;
   }
   .book__face--top {
@@ -1047,6 +1094,9 @@ body {
     height: auto;
     border-radius: 8px;
     background-color: #ECEDF4;
+  }
+  ul.dashboard_contd {
+    height: 800px !important;
   }
 }
 /*# sourceMappingURL=index.css.map */

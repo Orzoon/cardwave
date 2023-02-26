@@ -295,9 +295,11 @@ body {
 
             & .paraWrapper{
                 overflow: hidden;
-                //border: 1px solid green;
-                min-height: 50px;
+                min-height: 80px;
                 & p.bookDes {
+                    position: absolute;
+                    opacity: 0;
+                    top: 100%;
                     font-size: 14px;
                     color: rgb(81, 80, 80);
                 }
@@ -472,7 +474,7 @@ $bookEdge: 8px;
 .book__face--back {
   width: $frontBackWidth;
   height: $frontBackHeight;
-  background: red;
+  background: #959294;
 }
 
 
@@ -481,7 +483,7 @@ $bookEdge: 8px;
 .book__face--left {
   width: $leftRightWidth;
   height: $leftRightHeight;
-  background: green;
+  background: #dddde0;
   //px centre
   left: calc(($bookWidth/2) - ($leftRightWidth/2));
   //transform: translateX(-50%);
@@ -491,7 +493,7 @@ $bookEdge: 8px;
 .book__face--bottom {
   width: calc($topBottomWidth - $bookEdge/2);
   height: $topBottomHeight;
-  background: orange;
+  background: #b0b0b3;
   top: calc(($bookHeight/2) - ($topBottomHeight/2));
   //transform: translateY(-50%);
 }
@@ -508,13 +510,58 @@ $bookEdge: 8px;
     transform:  rotateZ(30deg) rotateY(-30deg) rotateX(-20deg);
 }
 
-//! edge fix
 //** width of left-right ---> height
 .book__face--right{
     height: calc($leftRightHeight - $bookEdge);
     top: calc($bookEdge/2);
 }
+.book__face--front{
+    overflow: hidden;
 
+    & .figure {
+        position: absolute;
+        top:calc(100% + 100px);
+        left: 0;
+        height: 100%;
+        width: 100%;
+       
+        & img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            overflow: hidden;
+        }
+
+        & .svgContainer {
+            //z-index: 999;
+            top: -120px;
+            position: absolute;
+            height: 80px; 
+            height: 140px; 
+            width: 900px;
+            display: grid;
+            z-index: -1;
+        }
+
+
+        // svgcontainer backgrounds--ref to svg
+        & .svgContainer0{
+            background: url("../assets/bookSvgT0.svg");
+            background-size: cover;
+        }
+
+        & .svgContainer1{
+            background: url("../assets/bookSvgT1.svg");
+            background-size: cover;
+        }
+        & .svgContainer2{
+            background: url("../assets/bookSvgT2.svg");
+            background-size: cover;
+        }
+    }
+}
+
+// book front child elements
 
 @media only screen and (min-width: 320px) {
     .left_sec_contd {
@@ -528,6 +575,9 @@ $bookEdge: 8px;
             top: 50%;
             right: -40px;
         }
+    }
+    .paraWrapper{
+        min-height: 62px !important;
     }
 }
 
@@ -599,6 +649,11 @@ $bookEdge: 8px;
 
 }
 
+@media only screen and (min-width: 400px){
+    .paraWrapper{
+        min-height: 50px !important;
+    }
+}
 @media only screen and (min-width: 768px){
     .left_sec_contd {
         padding: 15px 30px;
@@ -994,7 +1049,6 @@ $bookEdge: 8px;
     .book__face--back {
       width: $frontBackWidthl;
       height: $frontBackHeightl;
-      background: red;
     }
     
     
@@ -1003,7 +1057,6 @@ $bookEdge: 8px;
     .book__face--left {
       width: $leftRightWidthl;
       height: $leftRightHeightl;
-      background: green;
       //px centre
       left: calc(($bookWidthl/2) - ($leftRightWidthl/2));
       //transform: translateX(-50%);
@@ -1013,7 +1066,6 @@ $bookEdge: 8px;
     .book__face--bottom {
       width: calc($topBottomWidthl - $bookEdgel/2);
       height: $topBottomHeightl;
-      background: orange;
       top: calc(($bookHeightl/2) - ($topBottomHeightl/2));
       //transform: translateY(-50%);
     }
@@ -1168,6 +1220,9 @@ $bookEdge: 8px;
     }
 }
 
+@media only screen and (min-width: 1024px) and (min-height: 600px){
+
+}
 // heights
 @media only screen and (min-width: 1600px) and (min-height: 1000px){
     .mainWrapper{
@@ -1259,5 +1314,9 @@ $bookEdge: 8px;
                 background-color: #ECEDF4;
             }
         }
+    }
+
+    ul.dashboard_contd{
+        height: 800px !important;
     }
 }

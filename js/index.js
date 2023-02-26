@@ -11,10 +11,12 @@ window.addEventListener("load", () => {
     const headingWrapper = document.querySelector(".headingWrapper");
     const paraWrapper = document.querySelector(".paraWrapper");
 
+
     /** initialLoadAnimations */
     initialLoadAnimation();
     /** GLOBAL STATES AND VARS **/
     let navOpenBool = false;
+    let zIndex = 1;
     const timeline = [];
     setNavTimeline();
     /** EVENT LISTENERS */
@@ -98,6 +100,12 @@ window.addEventListener("load", () => {
     }
     
     function initialLoadAnimation(){
+        // figure0 in position
+        gsap.to(".figure0", {
+            top: "0%",
+            duration: 0
+        })
+        
         let leftTimeline = gsap.timeline({})
         let rightTimeline = gsap.timeline({
            
@@ -196,12 +204,12 @@ window.addEventListener("load", () => {
         .to(".text_sec .headingWrapper h2", {
             top: "0%", // 40% from opacity 0
             opacity: 1,
-            duration: 0.5
+            duration: 0.8 /// 0.5
         }, "<0.3")
-        .from(".text_sec .paraWrapper p", {
-            top: "40%", // 40% from opacity 0
-            opacity: 0,
-            duration: 0.6
+        .to(".text_sec .paraWrapper p", {
+            top: "0%", // 40% from opacity 0
+            opacity: 1,
+            duration: 0.8
         }, "<0.2")
         .from("button.reviewBtn", {
             top: "15px",
@@ -255,16 +263,16 @@ window.addEventListener("load", () => {
     // Book details
     const bookInfoArray = [
         {
-            displayText: "Wings Of Change",
-            description: "amet consectetur esse facere blanditiis nihil, soluta assumenda, beatae ipsum ullam quam velit ipsam quia"
+            displayText: "Wonderful Geography",
+            description: "The Earth's atmosphere and climate have changed since it formed more than four billion years ago"
         },
         {
             displayText: "Samurai Warrior",
-            description: "amet consectetur esse facere blanditiis nihil, soluta assumenda, beatae ipsum ullam quam velit ipsam quia"
+            description: "The samurai trace their origins to the Heian Period campaigns to subdue the native Emishi people"
         },
         {
             displayText: "Cosmos",
-            description: "amet consectetur esse facere blanditiis nihil, soluta assumenda, beatae ipsum ullam quam velit ipsam quia"
+            description: "In theology, the cosmos is the created heavenly bodies (sun, moon, wandering stars, and stars)"
         },
     ]
     
@@ -283,6 +291,15 @@ window.addEventListener("load", () => {
         // change BookDisplayText and description
         __tChangeBookDisDes(prevBookNo, currentBookNo)
 
+        // changing book cover
+        __tChangeBookCover(prevBookNo, currentBookNo)
+
+        // gsap.to(".svgContainer",{
+        //     right: "-100%",
+        //     duration: 3,
+          
+           
+        // })
 
     }
     //** HELPER FUNCTIONS  **//
@@ -305,35 +322,79 @@ window.addEventListener("load", () => {
         newElemP.appendChild(PText)
         //attaching to the main parentElement
         headingWrapper.appendChild(newElemH2);
-        //paraWrapper.appendChild(newElemP)
+        paraWrapper.appendChild(newElemP);
         
 
         // removing previousones-
         const prevElemH2 = document.querySelector(`.displayText${prevBookNo}`)
         const prevElemP = document.querySelector(`.bookDes${prevBookNo}`)
-        console.log(prevElemH2)
-        // removing the previous one
+
+
+        // removing the previous one-- heading
         gsap.to(prevElemH2,{
             top: "-100%",
-            duration: 0.6
+            duration: 0,
+            opacity: 0,
+            onComplete: () => {
+                // removing from dom
+                headingWrapper.removeChild(prevElemH2)
+            }
         })
 
         gsap.to(newElemH2, {
             top: "0%", 
             opacity: 1,
             duration: 0.5,
+        })
+
+        // removing the previous one-- Description
+        gsap.to(prevElemP, {
+            top: "-150%",
+            duration: 0,
+            opacity: 0,
             onComplete: () => {
-                    // removing from dom
-                    headingWrapper.removeChild(prevElemH2)
+                paraWrapper.removeChild(prevElemP)
             }
         })
 
 
+        gsap.to(newElemP, {
+            delay: 0.1,
+            top: "0%", 
+            opacity: 1,
+            duration: 0.5,
+        })
 
-        
+        // getting height and setting it
     }
 
-    function __insertBookImage(){
+    function __tChangeBookCover(prevBookNo, currentBookNo){
+        const bookCover = document.querySelector(`.figure${currentBookNo}`);
+        const bookCoverSvg = document.querySelector(`.svgContainer${currentBookNo}`);
+        bookCover.style.zIndex = zIndex + 1;
+        zIndex++;
+
+
+        gsap.fromTo(bookCoverSvg,{
+            left: "0%"
+        },{
+            left: "-200%",
+            duration: 2.5
+        })
+        
+
+        const Book = document.querySelector(".Book");
+        const bookHeight = parseInt(window.getComputedStyle(Book).height);
+        gsap.fromTo(bookCover,{
+            // bug with gsap cal2.5
+                top: bookHeight + 100
+            },
+            {
+                top: "0%",
+                duration: 1,
+                //ease: 'ease-in-out'
+            }  
+        )
 
     }
 
@@ -455,4 +516,5 @@ window.addEventListener("load", () => {
             })
         }
     }
+
 })
